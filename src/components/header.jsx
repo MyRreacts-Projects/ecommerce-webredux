@@ -171,9 +171,13 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
 import "bootstrap/dist/css/bootstrap.min.css";
-import cart from '../assets/cart.gif'
+import cart from '../assets/cart.gif';
+import { useSelector } from "react-redux";
+
 
 const Header = () => {
+  const getData = useSelector((state)=>state.cartreducer);
+  console.log(getData)
   // Menu open state
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
