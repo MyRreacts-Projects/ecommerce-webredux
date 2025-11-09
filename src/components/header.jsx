@@ -1,159 +1,3 @@
-// import React from "react";
-// import Container from 'react-bootstrap/Container';
-// import Badge from '@mui/material/Badge';
-// import Nav from 'react-bootstrap/Nav';
-// import Navbar from 'react-bootstrap/Navbar';
-// {
-//   /* The following line can be included in your src/index.js or App.js file */
-// }
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// // menu
-// import * as React from 'react';
-// import Button from '@mui/material/Button';
-// import ClickAwayListener from '@mui/material/ClickAwayListener';
-// import Grow from '@mui/material/Grow';
-// import Paper from '@mui/material/Paper';
-// import Popper from '@mui/material/Popper';
-// import MenuItem from '@mui/material/MenuItem';
-// import MenuList from '@mui/material/MenuList';
-// import Stack from '@mui/material/Stack';
-
-// // menu
-// import { NavLink } from "react-bootstrap";
-
-// const Header = ()=>{
-//      const [open, setOpen] = React.useState(false);
-//   const anchorRef = React.useRef<HTMLButtonElement>(null);
-
-//   const handleToggle = () => {
-//     setOpen((prevOpen) => !prevOpen);
-//   };
-
-  
-//  {
-//   const [open, setOpen] = React.useState(false);
-//   const anchorRef = React.useRef<HTMLButtonElement>(null);
-
-//   const handleToggle = () => {
-//     setOpen((prevOpen) => !prevOpen);
-//   };
-
-//   const handleClose = (event: Event | React.SyntheticEvent) => {
-//     if (
-//       anchorRef.current &&
-//       anchorRef.current.contains(event.target as HTMLElement)
-//     ) {
-//       return;
-//     }
-
-//     setOpen(false);
-//   };
-
-//   function handleListKeyDown(event: React.KeyboardEvent) {
-//     if (event.key === 'Tab') {
-//       event.preventDefault();
-//       setOpen(false);
-//     } else if (event.key === 'Escape') {
-//       setOpen(false);
-//     }
-//   }
-
-//   // return focus to the button when we transitioned from !open -> open
-//   const prevOpen = React.useRef(open);
-//   React.useEffect(() => {
-//     if (prevOpen.current === true && open === false) {
-//       anchorRef.current!.focus();
-//     }
-
-//     prevOpen.current = open;
-//   }, [open]);
-
-//   return (
-//     <Stack direction="row" spacing={2}>
-//       <Paper>
-//         <MenuList>
-//           <MenuItem>Profile</MenuItem>
-//           <MenuItem>My account</MenuItem>
-//           <MenuItem>Logout</MenuItem>
-//         </MenuList>
-//       </Paper>
-//       <div>
-//         <Button
-//           ref={anchorRef}
-//           id="composition-button"
-//           aria-controls={open ? 'composition-menu' : undefined}
-//           aria-expanded={open ? 'true' : undefined}
-//           aria-haspopup="true"
-//           onClick={handleToggle}
-//         >
-//           Dashboard
-//         </Button>
-//         <Popper
-//           open={open}
-//           anchorEl={anchorRef.current}
-//           role={undefined}
-//           placement="bottom-start"
-//           transition
-//           disablePortal
-//         >
-//           {({ TransitionProps, placement }) => (
-//             <Grow
-//               {...TransitionProps}
-//               style={{
-//                 transformOrigin:
-//                   placement === 'bottom-start' ? 'left top' : 'left bottom',
-//               }}
-//             >
-//               <Paper>
-//                 <ClickAwayListener onClickAway={handleClose}>
-//                   <MenuList
-//                     autoFocusItem={open}
-//                     id="composition-menu"
-//                     aria-labelledby="composition-button"
-//                     onKeyDown={handleListKeyDown}
-//                   >
-//                     <MenuItem onClick={handleClose}>Profile</MenuItem>
-//                     <MenuItem onClick={handleClose}>My account</MenuItem>
-//                     <MenuItem onClick={handleClose}>Logout</MenuItem>
-//                   </MenuList>
-//                 </ClickAwayListener>
-//               </Paper>
-//             </Grow>
-//           )}
-//         </Popper>
-//       </div>
-//     </Stack>
-//   );
-// }
-
-//     return(
-//        <>
-//        <Navbar bg="dark" data-bs-theme="dark" style={{height:60}}>
-//                <Container>
-//                  <NavLink to="/" className="text-light text-decoration-none mx-3">Add to Cart</NavLink>
-//                  <Nav className="me-auto">
-//                    <NavLink to="/">Home</NavLink>
-                  
-//                  </Nav>
-//                   <Badge badgeContent={4} color="primary">
-//                     {/* btn properties */}
-//  ref={anchorRef}
-//           id="composition-button"
-//           aria-controls={open ? 'composition-menu' : undefined}
-//           aria-expanded={open ? 'true' : undefined}
-//           aria-haspopup="true"
-//           onClick={handleToggle}
-//                     {/* btn pronperites closed */}
-//                     <i class="fa-solid fa-cart-shopping text-light" style={{fontSize : 25,cursor: 'pointer'}}></i>
-//              {/* <MailIcon color="action" /> */}
-//            </Badge>
-                
-//                </Container>
-//              </Navbar></>
-       
-//     )
-// }
-// export default Header;
 
 
 import React from "react";
@@ -277,9 +121,9 @@ const Header = () => {
                               <tbody>
                                 {getData.map((e)=>{
                                   return(
-                                    <>
-                                    <tr>
-                                     <td><img src={e.imgdata}  alt="img" style={{width:'5rem',height:'5rem'}} /></td>
+                                   <div key={e.id}>
+                                     <tr>
+                                     <td><NavLink to={`/cart/${e.id}`}><img src={e.imgdata}  alt="img" style={{width:'5rem',height:'5rem'}} /></NavLink></td>
                                      <td><p>{e.rname}</p>
                                      <p>Price : ₹{e.price}</p>
                                      <p>Quantity : {e.qnty}</p>
@@ -287,9 +131,10 @@ const Header = () => {
                                      </td>
                                      <td className="mt-t" style={{color:'red',fontSize:'20px',cursor:'pointer'}}><i className="fas fa-trash largetrash"></i></td>
                                     </tr>
-                                    </>
+                                   </div>
                                   )
                                 })} 
+                                <p className="text-center">Total : ₹300</p>
                               </tbody>
                             </Table>
                           </div>

@@ -1,6 +1,9 @@
 import React from 'react'
 import Table from "react-bootstrap/Navbar";
+import { useParams } from 'react-router-dom';
 const CardDetails = () => {
+  const {id} = useParams();
+  console.log(id)
   return (
 <>
 <div className="container mt-2">
