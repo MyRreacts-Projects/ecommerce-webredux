@@ -173,10 +173,10 @@ import Stack from "@mui/material/Stack";
 import "bootstrap/dist/css/bootstrap.min.css";
 import cart from '../assets/cart.gif';
 import { useSelector } from "react-redux";
-
+import { Table } from "react-bootstrap";
 
 const Header = () => {
-  const getData = useSelector((state)=>state.cartreducer);
+  const getData = useSelector((state)=>state.cartreducer.carts);
   console.log(getData)
   // Menu open state
   const [open, setOpen] = React.useState(false);
@@ -227,7 +227,7 @@ const Header = () => {
 
           <Stack direction="row" spacing={2}>
             {/* Cart Icon with Badge */}
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={getData.length} color="primary">
               <i
                 ref={anchorRef}
                 className="fa-solid fa-cart-shopping text-light"
@@ -240,7 +240,7 @@ const Header = () => {
             </Badge>
 
             {/* Dropdown Menu */}
-            <Popper
+            <Popper  style={{zIndex: 2000}}
               open={open}
               anchorEl={anchorRef.current}
               role={undefined}
@@ -256,7 +256,7 @@ const Header = () => {
                       placement === "bottom-start" ? "left top" : "left bottom",
                   }}
                 >
-                  <Paper>
+                  <Paper >
                     <ClickAwayListener onClickAway={handleClose}>
                       <MenuList
                         autoFocusItem={open}
@@ -264,14 +264,44 @@ const Header = () => {
                         aria-labelledby="composition-button"
                         onKeyDown={handleListKeyDown}
                       >
-                        {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}>My Account</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem> */}
-                     <div className="card_details d-flex justify-content-center align-items-center">
-                        <i class="fa-solid fa-xmark smallclose" style={{position: "absolute",top:2,right:20,fontSize:23,cursor:"pointer"}} onClick={handleClose}></i>
+                        {
+                          getData.length ? 
+                          <div className="card_details" style={{width:'24rem',padding:'10px'}}>
+                            <Table>
+                              <thead>
+                                <tr>
+                                  <th>Photos</th>
+                                  <th>Restaurant Name</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {getData.map((e)=>{
+                                  return(
+                                    <>
+                                    <tr>
+                                     <td><img src={e.imgdata}  alt="img" style={{width:'5rem',height:'5rem'}} /></td>
+                                     <td><p>{e.rname}</p>
+                                     <p>Price : ₹{e.price}</p>
+                                     <p>Quantity : {e.qnty}</p>
+                                     <p style={{color:'red',fontSize:'20px',cursor:'pointer'}}><i className="fas fa-trash smalltrash"></i></p>
+                                     </td>
+                                     <td className="mt-t" style={{color:'red',fontSize:'20px',cursor:'pointer'}}><i className="fas fa-trash largetrash"></i></td>
+                                    </tr>
+                                    </>
+                                  )
+                                })} 
+                              </tbody>
+                            </Table>
+                          </div>
+                          :
+                           <div className="card_details d-flex justify-content-center align-items-center">
+                        <i className="fa-solid fa-xmark smallclose" style={{position: "absolute",top:2,right:20,fontSize:23,cursor:"pointer"}} onClick={handleClose}></i>
                         <p style={{fontSize:22,padding:5}}>Your card is empty</p>
                          <img src={cart} className="emptycart_img" style={{width:'5rem',padding:10,marginTop:10}}/>
                      </div>
+                        }
+                       
+                    
                       </MenuList>
                     </ClickAwayListener>
                   </Paper>
