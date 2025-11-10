@@ -47,7 +47,7 @@ import React, { useEffect, useState } from 'react'
 import Table from "react-bootstrap/Table"; // ✅ FIXED: should import from Table, not Navbar
 import { useNavigate, useParams } from 'react-router-dom';
 import {useDispatch, useSelector}from 'react-redux';;
-import { DLT } from '../redux/actions/action';
+import { DLT,ADD,REMOVE} from '../redux/actions/action';
 
 const CardDetails = () => {
   const [data,setData] = useState([]);
@@ -66,10 +66,20 @@ const getData = useSelector((state) => state.cartreducer.carts);
     setData(compareData)
   }
 
+  // send function
+  const send = (e)=>{
+    console.log(e);
+    dispatch(ADD(e))
+  }
+
   // dlt function
   const dlt = (id)=>{
     dispatch(DLT(id));
     navigate('/')
+  }
+  // remove one function 
+  const remove = (item)=>{
+    dispatch(REMOVE(item))
   }
   // useeffect
   useEffect(()=>{
@@ -102,11 +112,11 @@ const getData = useSelector((state) => state.cartreducer.carts);
                       <p><strong>Price</strong> : {ele.price}</p>
                       <p><strong>Dishes</strong> : {ele.rname}
             </p>
-                      <p><strong>Total</strong> : ₹300</p>
+                      <p><strong>Total</strong> : ₹{ele.price * ele.qnty}</p>
                       <div className='mt-5 d-flex justify-content-between align-items-center'style={{width:100,cursor:'pointer',background:'#ddd',color:'#111'}}>
-                        <span style={{fontSize:24}}>-</span>
+                        <span style={{fontSize:24}} onClick={ele.qnty <=1 ?()=>dlt(ele.id):()=>remove(ele)}>-</span>
                         <span style={{fontSize:22}}>{ele.qnty}</span>
-                        <span style={{fontSize:24}}>+</span>
+                        <span style={{fontSize:24}} onClick={()=>send(ele)}>+</span>
 
                       </div>
                     </td>

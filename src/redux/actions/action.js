@@ -16,4 +16,16 @@ const DLT = (id)=>{
     }
     
 }
-export {ADD,DLT};
+
+
+// remove individual items
+const REMOVE = (item)=>{
+    return{
+        type : 'RMV_ONE',
+        payload : item
+    }
+    
+}
+
+
+export {ADD ,DLT,REMOVE};
