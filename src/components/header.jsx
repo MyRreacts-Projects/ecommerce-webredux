@@ -231,7 +231,8 @@ const Header = () => {
 const total = ()=>{
   let price = 0;
   getData.map((ele,k)=>{
-    price && ele.price + price
+    // price && ele.price *ele.qnty + price
+    price = ele.price * ele.qnty + price
   });
   setPrice(price)
 }
