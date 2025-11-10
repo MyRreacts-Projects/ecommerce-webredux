@@ -6,4 +6,14 @@ const ADD = (item)=>{
     }
     
 }
-export default  ADD;
+
+
+// remove item 
+const DLT = (id)=>{
+    return{
+        type : 'RMV_CART',
+        payload : id
+    }
+    
+}
+export {ADD,DLT};
