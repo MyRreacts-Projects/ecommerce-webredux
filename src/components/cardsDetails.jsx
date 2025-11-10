@@ -103,6 +103,12 @@ const getData = useSelector((state) => state.cartreducer.carts);
                       <p><strong>Dishes</strong> : {ele.rname}
             </p>
                       <p><strong>Total</strong> : ₹300</p>
+                      <div className='mt-5 d-flex justify-content-between align-items-center'style={{width:100,cursor:'pointer',background:'#ddd',color:'#111'}}>
+                        <span style={{fontSize:24}}>-</span>
+                        <span style={{fontSize:22}}>{ele.qnty}</span>
+                        <span style={{fontSize:24}}>+</span>
+
+                      </div>
                     </td>
                     <td>
                       <p>
